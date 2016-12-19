@@ -1,3 +1,5 @@
+# Get the Ropository Folder form the Git Pillar
+{% set git_data=salt['pillar.get']('git_data') %}
 
 # Get the List of post-receive_hooks
 {% set hook_list = salt['pillar.get']('post-receive_hooks') %}
