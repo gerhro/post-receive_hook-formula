@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # Get the List of post-receive_hooks
 {% set hook_list = salt['pillar.get']('post-receive_hooks') %}
@@ -25,4 +24,3 @@
 
 {% endfor %}
 =======
->>>>>>> master
