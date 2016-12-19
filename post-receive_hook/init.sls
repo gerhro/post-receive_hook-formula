@@ -17,3 +17,4 @@
       - contents_pillar: gitlab_custom_hooks:{{ hook }}:file
 
 {% endfor %}
+
