@@ -5,7 +5,7 @@
 {% set hook_list = salt['pillar.get']('post-receive_hooks') %}
 
 {% for hook in hook_list %}
-{% set group = salt['pillar.get']('post-receive_hooks:{{ hook }}:group') %}
+  {% set group = salt['pillar.get']('post-receive_hooks:{{ hook }}:group') %}
 
   post-receive_hook_{{ hook }}:
     file.managed:
@@ -15,4 +15,5 @@
       - group: root
       - file_mode: 754
       - contents_pillar: gitlab_custom_hooks:{{ hook }}:file
+
 {% endfor %}
