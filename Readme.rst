@@ -1,7 +1,7 @@
 post-receive_hook-formula
 ===========================
 
-Create Custom_hooks for the gitlab
+On the git server, add a post-receive hook
 
 .. note::
 
