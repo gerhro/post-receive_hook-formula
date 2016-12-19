@@ -1,0 +1,32 @@
+# The path to the gitlab repositories
+git_data: /var/opt/gitlab/git-data/repositories/
+post-receive_hooks:
+  # then name of the repsitory
+  ext_pillar:
+    # The Group Name from the Repository
+    group: salt
+    # The Contend of the Custom Hook
+    file: |
+      #!/usr/bin/env sh
+      sudo -u root salt-call event.fire_master update salt/fileserver/ext_pillar/update
+  salt-states:
+    group: salt
+    file: |
+      #!/usr/bin/env sh
+      sudo -u root salt-call event.fire_master update salt/fileserver/gitfs/update
+
+
+# Example for the sudors configuration
+# But the sudoers-formula must be present
+sudoers:
+  users:
+    root:
+      - ALL=(root) NOPASSWD: SALT_GIT_HOOK
+  aliases:
+    commands:
+      SALT_GIT_HOOK:
+        - /bin/salt-call event.fire_master update salt/fileserver/gitfs/update
+        - /bin/salt-call event.fire_master update salt/fileserver/ext_pillar/update
+  defaults:
+    command_list:
+      SALT_GIT_HOOK: '!requiretty'
