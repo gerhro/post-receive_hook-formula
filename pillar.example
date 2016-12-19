@@ -19,14 +19,16 @@ post-receive_hooks:
 # Example for the sudors configuration
 # But the sudoers-formula must be present
 sudoers:
-  users:
-    root:
-      - 'ALL=(root) NOPASSWD: SALT_GIT_HOOK'
-  aliases:
-    commands:
-      SALT_GIT_HOOK:
-        - /bin/salt-call event.fire_master update salt/fileserver/gitfs/update
-        - /bin/salt-call event.fire_master update salt/fileserver/ext_pillar/update
-  defaults:
-    command_list:
-      SALT_GIT_HOOK: '!requiretty'
+  included_files:
+    /etc/sudoers.d/gitlab:
+      users:
+        root:
+          - 'ALL=(root) NOPASSWD: SALT_GIT_HOOK'
+      aliases:
+        commands:
+          SALT_GIT_HOOK:
+            - /bin/salt-call event.fire_master update salt/fileserver/gitfs/update
+            - /bin/salt-call event.fire_master update salt/fileserver/ext_pillar/update
+      defaults:
+        command_list:
+          SALT_GIT_HOOK: '!requiretty'
