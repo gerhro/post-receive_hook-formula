@@ -21,7 +21,7 @@ post-receive_hooks:
 sudoers:
   users:
     root:
-      - ALL=(root) NOPASSWD: SALT_GIT_HOOK
+      - 'ALL=(root) NOPASSWD: SALT_GIT_HOOK'
   aliases:
     commands:
       SALT_GIT_HOOK:
