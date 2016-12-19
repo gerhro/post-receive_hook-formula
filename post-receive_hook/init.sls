@@ -6,7 +6,7 @@
 
 {% for hook in hook_list %}
   {% set group = salt['pillar.get']('post-receive_hooks:{{ hook }}:group') %}
-
+# '
   post-receive_hook_{{ hook }}:
     file.managed:
       - name: {{ git_data }}{{ group }}/{{ hook }}/custom_hook/post-receive
