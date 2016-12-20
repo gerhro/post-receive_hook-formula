@@ -22,3 +22,7 @@ Available states
 ``post-receive_hook``
 -----------------------
 Add the custom hooks
+
+``post-receive_hook.sudoers``
+-----------------------
+Set up an additional sudoers included file
