@@ -17,7 +17,13 @@ post-receive_hooks:
     file: |
       #!/usr/bin/env sh
       sudo -u root salt-call event.fire_master update salt/fileserver/gitfs/update
-
+  salt-reactor:
+    group: salt
+    sudo: True
+    file: |
+      #!/usr/bin/env sh
+      sudo -u root salt-call event.fire_master update salt/fileserver/gitfs/update
+      
 post-receive_sudo:
   users:
   # Add the user root to execute the alias without password
