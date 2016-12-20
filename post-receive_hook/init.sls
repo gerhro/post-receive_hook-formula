@@ -1,3 +1,8 @@
+{% if salt['pillar.get']('post-receive_sudo') %}
+include:
+  - post-receive_hook.sudoers
+{% endif %}
+
 # Get the Ropository Folder form the Git Pillar
 {% set git_data=salt['pillar.get']('git_data') %}
 
@@ -24,8 +29,3 @@
 {% endif %}
 
 {% endfor %}
-
-{% if salt['pillar.get']('post-receive_sudo') %}
-include:
-  - post-receive_hook.sudoers
-{% endif %}
