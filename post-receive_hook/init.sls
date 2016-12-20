@@ -20,5 +20,9 @@ custom_hook_{{ hook }}:
 
 {% if salt['pillar.get']('post-receive_sudo') %}
 include:
+<<<<<<< HEAD
   - post-receive_hooks.sudoers
+=======
+- post-receive_hooks.sudoers
+>>>>>>> master
 {% endif %}
