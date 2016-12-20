@@ -9,27 +9,27 @@ post-receive_hooks:
     file: |
       #!/usr/bin/env sh
       sudo -u root salt-call event.fire_master update salt/fileserver/ext_pillar/update
+    # User sudo
+    sudo: True
   salt-states:
     group: salt
+    sudo: True
     file: |
       #!/usr/bin/env sh
       sudo -u root salt-call event.fire_master update salt/fileserver/gitfs/update
 
-
-# Example for the sudors configuration
-# But the sudoers-formula must be present
-# TODO sudoers-formula doesn't work for me, will do my own implementation
-sudoers:
-  included_files:
-    /etc/sudoers.d/gitlab:
-      users:
-        root:
-          - 'ALL=(root) NOPASSWD: SALT_GIT_HOOK'
-      aliases:
-        commands:
-          SALT_GIT_HOOK:
-            - /bin/salt-call event.fire_master update salt/fileserver/gitfs/update
-            - /bin/salt-call event.fire_master update salt/fileserver/ext_pillar/update
-      defaults:
-        command_list:
-          SALT_GIT_HOOK: '!requiretty'
+post-receive_sudo:
+  users:
+  # Add the user root to execute the alias without password
+    root:
+      - 'ALL=(root) NOPASSWD: SALT_GIT_HOOK'
+  aliases:
+  # Set the aliases for the salt-call events
+    commands:
+      SALT_GIT_HOOK:
+        - /bin/salt-call event.fire_master update salt/fileserver/gitfs/update
+        - /bin/salt-call event.fire_master update salt/fileserver/ext_pillar/update
+  # Define the default settings for the Command
+  defaults:
+    command_list:
+      SALT_GIT_HOOK: '!requiretty'
