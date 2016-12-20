@@ -1,4 +1,7 @@
-{% if salt['pillar.get']('post-receive_sudo') %}
+{% set post-receive_sudo=salt['pillar.get']('post-receive_sudo', '') %}
+
+{% if post-receive_sudo %}
+
 include:
   - post-receive_hook.sudoers
 {% endif %}
