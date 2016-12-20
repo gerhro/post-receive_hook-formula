@@ -1,0 +1,62 @@
+########################################################################
+# File managed by Salt (post-receive-hook-formula).
+# Your changes will be overwritten.
+########################################################################
+#
+{%- set sudoers_githook = pillar.get('post-receive_sudo', {}) %}
+# Set user_root
+{%- set users = sudoers_githook.get('user_root', {}) %}
+# Set defaults
+{%- set defaults = sudoers_githook.get('defaults', {}) %}
+{%- set generic_defaults = defaults.get('generic', []) %}
+{%- set user_list_defaults = defaults.get('user_list', {}) %}
+{%- set host_list_defaults = defaults.get('host_list', {}) %}
+{%- set command_list_defaults = defaults.get('command_list', {}) %}
+{%- set runas_list_defaults = defaults.get('runas_list', {}) %}
+{%- set users = sudoers_githook.get('users', {}) %}
+# Set Alias
+{%- set aliases = sudoers_githook.get('aliases', {}) %}
+{%- set host_aliases = aliases.get('hosts', {}) %}
+{%- set user_aliases = aliases.get('users', {}) %}
+{%- set command_aliases = aliases.get('commands', {}) %}
+{%- set includedir = sudoers_githook.get('includedir', '/etc/sudoers.d') -%}
+{%- set runas_aliases = aliases.get('runas', {}) -%}
+
+# Defaults specification
+{% for default in generic_defaults -%}
+Defaults {{ default }}
+{% endfor %}
+{%- for user,spec in user_list_defaults.items() %}
+Defaults:{{ user }} {{ spec }}
+{%- endfor %}
+{%- for host,spec in host_list_defaults.items() %}
+Defaults@{{ host }} {{ spec }}
+{%- endfor %}
+{%- for command,spec in command_list_defaults.items() %}
+Defaults!{{ command }} {{ spec }}
+{%- endfor %}
+{%- for runas,spec in runas_list_defaults.items() %}
+Defaults>{{ runas }} {{ spec }}
+{%- endfor %}
+
+# User alias specification
+{%- for name,users in user_aliases.items() %}
+User_Alias {{ name }} = {{ ",".join(users) }}
+{%- endfor %}
+
+# Cmnd alias specification
+{%- for name,commands in command_aliases.items() %}
+Cmnd_Alias {{ name }} = {{ ",".join(commands) }}
+{%- endfor %}
+
+# Runas alias specification
+{%- for name,runas in runas_aliases.items() %}
+Runas_Alias {{ name }} = {{ ",".join(runas) }}
+{%- endfor %}
+
+# User privilege specification
+{%- for user,specs in users.items() %}
+  {%- for spec in specs %}
+{{ user }} {{ spec }}
+  {%- endfor %}
+{%- endfor %}
