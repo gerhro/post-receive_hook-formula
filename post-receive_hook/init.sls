@@ -5,7 +5,7 @@
 {% set hook_list = salt['pillar.get']('post-receive_hooks') %}
 
 {% for hook in hook_list %}
-{% set group = salt['pillar.get']('post-receive_hooks:{{ hook }}:group') %}
+{% set group = salt['pillar.get']('post-receive_hooks:' ~ hook ~ ':group') %}
 
 custom_hook_{{ hook }}:
   file.managed:
