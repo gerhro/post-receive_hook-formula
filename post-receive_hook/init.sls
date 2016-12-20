@@ -22,7 +22,7 @@ custom_hook_{{ hook }}:
     - makedirs: True
     - user: root
     - group: root
-    - file_mode: 754
+    - mode: 754
     - contents_pillar: post-receive_hooks:{{ hook }}:file
 
 {% else %}
