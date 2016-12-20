@@ -1,0 +1,16 @@
+{% set sudoers_githook = salt['grains.filter_by']({
+    'Debian':  {'pkg': 'sudo'},
+    'Ubuntu':  {'pkg': 'sudo'},
+    'CentOS':  {'pkg': 'sudo'},
+    'Fedora':  {'pkg': 'sudo'},
+    'RedHat':  {'pkg': 'sudo'},
+    'Amazon':  {'pkg': 'sudo'},
+    'Gentoo':  {'pkg': 'app-admin/sudo'},
+    'Mint':    {'pkg': 'sudo'},
+    'Arch':    {'pkg': 'sudo'},
+    'Suse':    {'pkg': 'sudo'},
+    'FreeBSD': {'pkg': 'sudo',
+                'config-path': '/usr/local/etc',
+                'exec-prefix': '/usr/local/sbin',
+                'group': 'wheel'},
+}, merge=salt['pillar.get']('sudoers_githook:lookup')) %}
