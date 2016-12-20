@@ -21,7 +21,7 @@
   Fail - no group in the post-receive_hooks [PILLAR Data]:
     test:
       A. fail_without_changes
-{% endif %} 
+{% endif %}
 
 {% endfor %}
 
