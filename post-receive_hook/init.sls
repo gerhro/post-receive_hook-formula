@@ -23,7 +23,7 @@ custom_hook_{{ hook }}:
     - user: root
     - group: root
     - file_mode: 754
-    - contents_pillar: gitlab_custom_hooks:{{ hook }}:file
+    - contents_pillar: post-receive_hooks:{{ hook }}:file
 
 {% else %}
   Fail - no group in the post-receive_hooks [PILLAR Data]:
