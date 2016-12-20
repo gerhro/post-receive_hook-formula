@@ -18,7 +18,7 @@ custom_hook_{{ hook }}:
 
 {% endfor %}
 
-{% if salt['pillar.get']('post-receive_sudo) %}
+{% if salt['pillar.get']('post-receive_sudo') %}
   include:
     post-receive_hooks.sudoers
 {% endif %}
