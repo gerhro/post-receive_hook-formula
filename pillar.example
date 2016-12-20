@@ -18,6 +18,7 @@ post-receive_hooks:
 
 # Example for the sudors configuration
 # But the sudoers-formula must be present
+# TODO sudoers-formula doesn't work for me, will do my own implementation
 sudoers:
   included_files:
     /etc/sudoers.d/gitlab:
