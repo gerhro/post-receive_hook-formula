@@ -2,7 +2,7 @@
 git_data: /var/opt/gitlab/git-data/repositories/
 post-receive_hooks:
   # then name of the repsitory
-  salt_pillar:
+  salt-pillar:
     # The Group Name from the Repository
     group: salt
     # The Contend of the Custom Hook

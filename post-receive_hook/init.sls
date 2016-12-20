@@ -18,7 +18,7 @@ include:
 
 custom_hook_{{ hook }}:
   file.managed:
-    - name: {{ git_data }}{{ hook_group }}/{{ hook }}.git/custom_hook/post-receive
+    - name: {{ git_data }}{{ hook_group }}/{{ hook }}.git/custom_hooks/post-receive
     - makedirs: True
     - user: root
     - group: root
