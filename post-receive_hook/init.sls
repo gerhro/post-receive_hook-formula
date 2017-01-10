@@ -20,8 +20,8 @@ custom_hook_{{ hook }}:
   file.managed:
     - name: {{ git_data }}{{ hook_group }}/{{ hook }}.git/custom_hooks/post-receive
     - makedirs: True
-    - user: root
-    - group: root
+    - user: git
+    - group: git
     - mode: 754
     - contents_pillar: post-receive_hooks:{{ hook }}:file
 
